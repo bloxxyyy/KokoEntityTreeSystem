@@ -9,12 +9,12 @@ namespace KokoEntityTreeSystem.src.entity_data;
 /// </summary>
 public abstract class Entity {
     public int Identifier { get; }
-    private List<IEntityObserver> _observers = new List<IEntityObserver>();
+    private readonly List<IEntityObserver> _observers = new();
 
     protected Entity(int identifier) {
         Identifier = identifier;
     }
 
     public void RegisterObserver(IEntityObserver observer) =>_observers.Add(observer);
-    public void NotifyObservers() => _observers.ForEach(o => o.OnEntityDestroyed(this));
+    public void NotifyDestruction() => _observers.ForEach(o => o.OnEntityDestroyed(this));
 }
