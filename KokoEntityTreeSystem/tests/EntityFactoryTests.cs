@@ -14,11 +14,13 @@ public class EntityFactoryTests {
         public MockEntity(int identifier) : base(identifier) { }
     }
 
+    Func<string, object> mockLogger = (msg) => throw new InvalidOperationException(msg);
+
     [Fact]
     public void CreateEntity_AddToSingleTree_EntityAddedToCorrectTree() {
         // Arrange
-        var entityTreeManager = new EntityTreeManager();
-        var entityFactory = new EntityFactory(entityTreeManager);
+        var entityTreeManager = new EntityTreeManager(mockLogger);
+        var entityFactory = new EntityFactory(entityTreeManager, mockLogger);
         var tree = new MockEntityTree(1);
         var tree2 = new MockEntityTree(2);
 
@@ -38,8 +40,8 @@ public class EntityFactoryTests {
     [Fact]
     public void CreateEntity_AddToMultipleTrees_EntityAddedToAllCorrectTrees() {
         // Arrange
-        var entityTreeManager = new EntityTreeManager();
-        var entityFactory = new EntityFactory(entityTreeManager);
+        var entityTreeManager = new EntityTreeManager(mockLogger);
+        var entityFactory = new EntityFactory(entityTreeManager, mockLogger);
         var tree1 = new MockEntityTree(1);
         var tree2 = new MockEntityTree(2);
         var tree3 = new MockEntityTree(3);
@@ -64,8 +66,8 @@ public class EntityFactoryTests {
     [Fact]
     public void DestroyEntity_EntityRemovedFromAllTrees() {
         // Arrange
-        var entityTreeManager = new EntityTreeManager();
-        var entityFactory = new EntityFactory(entityTreeManager);
+        var entityTreeManager = new EntityTreeManager(mockLogger);
+        var entityFactory = new EntityFactory(entityTreeManager, mockLogger);
         var tree1 = new MockEntityTree(1);
         var tree2 = new MockEntityTree(2);
         entityTreeManager.AddTree(tree1);
@@ -83,8 +85,8 @@ public class EntityFactoryTests {
     [Fact]
     public void CreateEntity_InvalidTree_ThrowsException() {
         // Arrange
-        var entityTreeManager = new EntityTreeManager();
-        var entityFactory = new EntityFactory(entityTreeManager);
+        var entityTreeManager = new EntityTreeManager(mockLogger);
+        var entityFactory = new EntityFactory(entityTreeManager, mockLogger);
 
         // Act and assert
         var ex = Assert.Throws<InvalidOperationException>(() => {
@@ -97,8 +99,8 @@ public class EntityFactoryTests {
     [Fact]
     public void CreateEntity_NoTreesPassed_ThrowsInvalidOperationException() {
         // Arrange
-        var entityTreeManager = new EntityTreeManager();
-        var entityFactory = new EntityFactory(entityTreeManager);
+        var entityTreeManager = new EntityTreeManager(mockLogger);
+        var entityFactory = new EntityFactory(entityTreeManager, mockLogger);
 
         // Act and assert
         var ex = Assert.Throws<InvalidOperationException>(
