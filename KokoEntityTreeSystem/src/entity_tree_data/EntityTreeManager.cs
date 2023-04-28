@@ -42,11 +42,18 @@ public class EntityTreeManager {
     public void RemoveTree(EntityTree tree) => _entityTrees.Remove(tree.Identifier);
     public EntityTree GetTree(int identifier) => _entityTrees[identifier];
 
+    public T? GetTree<T>(int identifier) where T : EntityTree {
+        if (_entityTrees.TryGetValue(identifier, out var tree) && tree is T tTree)
+            return tTree;
+        
+        return null;
+    }
+
     public EntityTree[] GetTrees() {
         var trees = new EntityTree[_entityTrees.Count];
         _entityTrees.Values.CopyTo(trees, 0);
         return trees.ToArray();
     }
-
+    
     #endregion
 }

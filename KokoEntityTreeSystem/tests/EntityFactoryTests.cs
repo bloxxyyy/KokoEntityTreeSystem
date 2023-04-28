@@ -3,7 +3,6 @@
 using Xunit;
 using KokoEntityTreeSystem.src.entity_data;
 using KokoEntityTreeSystem.src.entity_tree_data;
-using System.Numerics;
 
 public class EntityFactoryTests {
 
@@ -15,7 +14,7 @@ public class EntityFactoryTests {
         public MockEntity(int identifier) : base(identifier) { }
     }
 
-    Action<string> mockLogger = (msg) => throw new InvalidOperationException(msg);
+    private readonly Action<string> mockLogger = (msg) => throw new InvalidOperationException(msg);
 
     [Fact]
     public void CreateEntity_AddToSingleTree_EntityAddedToCorrectTree() {

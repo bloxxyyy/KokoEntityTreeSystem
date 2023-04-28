@@ -10,7 +10,6 @@ public abstract class EntityTree : IEntityObserver {
 
     #region CRUD operations
     public void AddEntity(Entity entity) => _entities.Add(entity.Identifier, entity);
-    public Entity GetEntity(int identifier) => _entities[identifier];
     public void OnEntityDestroyed(Entity entity) => RemoveEntity(entity);
     public void RemoveEntity(Entity entity) => _entities.Remove(entity.Identifier);
 
@@ -18,6 +17,15 @@ public abstract class EntityTree : IEntityObserver {
         var entities = new Entity[_entities.Count];
         _entities.Values.CopyTo(entities, 0);
         return entities.ToArray();
+    }
+
+    public Entity GetEntity(int identifier) => _entities[identifier];
+
+    public T? GetEntity<T>(int identifier) where T : Entity {
+        if (_entities.TryGetValue(identifier, out var entity) && entity is T tEntity)
+            return tEntity;
+
+        return null;
     }
 
     #endregion
