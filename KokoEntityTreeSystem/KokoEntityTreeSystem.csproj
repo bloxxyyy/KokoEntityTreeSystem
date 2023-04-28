@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <IsPackable>true</IsPackable>
@@ -22,7 +22,22 @@
     <PackageProjectUrl>https://github.com/bloxxyyy/Koko_TreeAbleEntitySystem</PackageProjectUrl>
     <RepositoryUrl>https://github.com/bloxxyyy/Koko_TreeAbleEntitySystem</RepositoryUrl>
     <PackageTags>ECS</PackageTags>
+    <Copyright>https://github.com/bloxxyyy/KokoEntityTreeSystem/blob/master/LICENSE</Copyright>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\KokoEntityComponentSystem\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\KokoEntityComponentSystem\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
