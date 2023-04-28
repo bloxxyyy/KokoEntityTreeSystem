@@ -29,11 +29,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\..\KokoEntityComponentSystem\LICENSE">
+    <None Include="..\LICENSE">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
-    <None Include="..\..\KokoEntityComponentSystem\README.md">
+    <None Include="..\README.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
